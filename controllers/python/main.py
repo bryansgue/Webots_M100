@@ -13,6 +13,9 @@ from scipy.spatial.transform import Rotation as R
 from tf import TransformBroadcaster
 import tf.transformations as tft
 
+from std_msgs.msg import Header
+from sensor_msgs.msg import Image
+
 
 xd = 3.0
 yd = -4.6
@@ -84,27 +87,33 @@ def camera_system(robot, name, timestep):
     return camera
 
 def get_image(camera):
-    # Adquisition of camera information
-    data = camera.getImage()
+    # Adquisición de información de la cámara
+    data = np.frombuffer(camera.getImage(), dtype=np.uint8)
 
-    # Decoding image more faster that others metods
-    img = np.frombuffer(data, np.uint8)
-
-    # Resize the image to the respective dimesions
-    aux = img.reshape(camera.getHeight(), camera.getWidth(), 4)
+    # Cambio de tamaño de la imagen a las dimensiones respectivas
+    frame = data.reshape((camera.getHeight(), camera.getWidth(), 4))[:, :, :3]
 
     # Convert image to the respective type of open cv
-    frame = cv2.cvtColor(aux, cv2.COLOR_BGRA2BGR)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+
     return frame
 
 def send_image(bridge, imglr_pub, imgr):
-    # Concatenate images L and R
-    # Decode Image left
-    msglr = bridge.cv2_to_imgmsg(imgr, 'bgr8')
-    msglr.header.stamp = rospy.Time.now();
-    msglr.header.frame_id = "camera_link"
-    imglr_pub.publish(msglr)
-    return None
+    # Create the message header
+    header = Header()
+    header.stamp = rospy.Time.now()
+    header.frame_id = "camera_link"
+
+    # Convert the image to the appropriate message type
+    img_msg = bridge.cv2_to_imgmsg(imgr, encoding='bgr8')
+    img_msg.header = header
+
+    # Publish the image message
+    imglr_pub.publish(img_msg)
+
+
+
+
 
 def send_image_depth(bridge, imglr_pub, imgr):
     # Concatenate images L and R
@@ -210,9 +219,11 @@ def send_camera_tf(camera_tf):
     return None
 
 def set_robot(translation, rotation, h, angle):
-    translation.setSFVec3f(h)
-    rotation.setSFRotation(angle)
+    if translation != [0, 0, 0]:
+        translation.setSFVec3f(h)
+        rotation.setSFRotation(angle)
     return None
+
 
 def send_odometry(odom_msg, odom_pu):
     odom_pu.publish(odom_msg)
@@ -228,8 +239,7 @@ def main(robot, image_pu_rgb, image_pu_d, odometry_pu):
     # Frequency of the simulation
     hz = int(1/sample_time)
 
-    # Rate Ros Node
-    loop_rate = rospy.Rate(100)
+    
     
     # Prop1 get Node
     Prop1_node = robot.getFromDef('PROP1')
@@ -289,7 +299,7 @@ def main(robot, image_pu_rgb, image_pu_d, odometry_pu):
     # Vector inicial
     vector = np.array([0, 0, 0])
     ###############################################################
-    
+    rate = rospy.Rate(15)
     # Initial Rotation system
     while robot.step(time_step) != -1:
         tic = time.time()
@@ -336,11 +346,12 @@ def main(robot, image_pu_rgb, image_pu_d, odometry_pu):
         send_camera_tf(camera_tf)
         send_odometry(odom_drone, odometry_pu)
 
-        while (time.time() - tic <= 1/15):
-                None
+        rate.sleep()
         toc = time.time() - tic 
+    
+        print("FPS: {:.2f} segundos".format(1/toc), end='\r')
+    
         
-        print("FPS: {:.2f}".format(1/toc), end='\r')
         
     return None
 
@@ -355,7 +366,7 @@ if __name__ == '__main__':
         # Vision Topic 
         image_topic_rbg = "/camera/color/image_raw"
         image_topic_d = "/camera/aligned_depth_to_color/image_raw"
-        image_publisher_rgb = rospy.Publisher(image_topic_rbg, Image, queue_size=20)
+        image_publisher_rgb = rospy.Publisher(image_topic_rbg, Image, queue_size=1)
         image_publisher_d = rospy.Publisher(image_topic_d, Image, queue_size=20)
 
         odometry_topic = "/dji_sdk/odometry"

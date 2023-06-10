@@ -1,19 +1,3 @@
-/*
- * Copyright 1996-2021 Cyberbotics Ltd.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 #include <webots/robot.h>
 #include <webots/supervisor.h>
 
@@ -21,13 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXIMUM_NUMBER_OF_COORDINATES 100  // Size of the history.
-#define REFRESH_FACTOR 20                 // Refresh the trail every REFRESH_FACTOR * WorldInfo.basicTimeStep.
+#define MAXIMUM_NUMBER_OF_COORDINATES 50  // Size of the history.
+#define REFRESH_FACTOR 2                 // Refresh the trail every REFRESH_FACTOR * WorldInfo.basicTimeStep.
 
 // Create the trail shape with the correct number of coordinates.
 static void create_trail_shape() {
   // If TRAIL exists in the world then silently remove it.
-  WbNodeRef existing_trail = wb_supervisor_node_get_from_def("TRIAL");
+  WbNodeRef existing_trail = wb_supervisor_node_get_from_def("TRAIL");
   if (existing_trail)
     wb_supervisor_node_remove(existing_trail);
 
@@ -38,8 +22,8 @@ static void create_trail_shape() {
   strcat(trail_string, "DEF TRAIL Shape {\n");
   strcat(trail_string, "  appearance Appearance {\n");
   strcat(trail_string, "    material Material {\n");
-  strcat(trail_string, "      diffuseColor 0 1 0.5\n");
-  strcat(trail_string, "      emissiveColor 0 1 0.5\n");
+  strcat(trail_string, "      diffuseColor 0 1 0\n");
+  strcat(trail_string, "      emissiveColor 0 0.5 0\n");
   strcat(trail_string, "    }\n");
   strcat(trail_string, "  }\n");
   strcat(trail_string, "  geometry DEF TRAIL_LINE_SET IndexedLineSet {\n");
@@ -88,31 +72,36 @@ int main(int argc, char **argv) {
     // Get the current target translation.
     const double *target_translation = wb_supervisor_node_get_position(target_node);
 
-    // Add the new target translation in the line set.
-    wb_supervisor_field_set_mf_vec3f(point_field, index, target_translation);
+    // Only add the new target translation to the line set if it's not [0, 0, 0].
+    if (target_translation[0] != 0.0 || target_translation[1] != 0.0 || target_translation[2] != 0.0) {
+      // Add the new target translation to the line set.
+      wb_supervisor_field_set_mf_vec3f(point_field, index, target_translation);
 
-    // Update the line set indices.
-    if (index > 0) {
-      // Link successive indices.
-      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (index - 1), index - 1);
-      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (index - 1) + 1, index);
-    } else if (index == 0 && first_step == false) {
-      // Link the first and the last indices.
-      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (MAXIMUM_NUMBER_OF_COORDINATES - 1), 0);
-      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (MAXIMUM_NUMBER_OF_COORDINATES - 1) + 1,
-                                       MAXIMUM_NUMBER_OF_COORDINATES - 1);
+      // Update the line set indices.
+      if (index > 0) {
+        // Link successive indices.
+        wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (index - 1), index - 1);
+        wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (index - 1) + 1, index);
+      } else if (index == 0 && first_step == false) {
+        // Link the first and the last indices.
+        wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (MAXIMUM_NUMBER_OF_COORDINATES - 1), 0);
+        wb_supervisor_field_set_mf_int32(coord_index_field, 3 * (MAXIMUM_NUMBER_OF_COORDINATES - 1) + 1,
+                                         MAXIMUM_NUMBER_OF_COORDINATES - 1);
+      }
+      // Unset the next indices.
+      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * index, index);
+      wb_supervisor_field_set_mf_int32(coord_index_field, 3 * index + 1, index);
+    } else {
+      // If the target translation is [0, 0, 0], skip adding it to the line set and continue to the next iteration.
+      continue;
     }
-    // Unset the next indices.
-    wb_supervisor_field_set_mf_int32(coord_index_field, 3 * index, index);
-    wb_supervisor_field_set_mf_int32(coord_index_field, 3 * index + 1, index);
-
-       
-
+    
+    //printf("Hola, este es un mensaje en C.\n");
     // Update global variables.
     first_step = false;
     index++;
     index = index % MAXIMUM_NUMBER_OF_COORDINATES;
-  };
+  }
 
   wb_robot_cleanup();
 
