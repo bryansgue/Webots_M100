@@ -341,7 +341,7 @@ def main(robot, image_pu_rgb, image_pu_d, odometry_pu):
         
         # Send Images
         send_image(bridge, image_pu_rgb, img_rgb)
-        #send_image_depth(bridge, image_pu_d, img_d)
+        send_image_depth(bridge, image_pu_d, img_d)
         send_drone_tf(drone_tf, odom_drone)
         send_camera_tf(camera_tf)
         send_odometry(odom_drone, odometry_pu)
@@ -364,7 +364,7 @@ if __name__ == '__main__':
         robot_a = Supervisor()
 
         # Vision Topic 
-        image_topic_rbg = "/camera/color/image_raw"
+        image_topic_rbg = "/sim/color/image_raw"
         image_topic_d = "/camera/aligned_depth_to_color/image_raw"
         image_publisher_rgb = rospy.Publisher(image_topic_rbg, Image, queue_size=1)
         image_publisher_d = rospy.Publisher(image_topic_d, Image, queue_size=20)

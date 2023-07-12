@@ -16,17 +16,17 @@ WorldInfo {
 }
 Viewpoint {
   fieldOfView 0.660595
-  orientation -0.25139343248290114 0.4337549216176967 0.8652502586401755 1.3433821060027145
-  position -0.6795607249618627 -2.676724059938832 3.468218486615467
+  orientation 0.024054442236809286 -0.7605330630184199 -0.648853484127577 5.500729428724161
+  position -54.69966130947587 -27.64699027447253 39.807353834737214
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 UnevenTerrain {
-  translation 20.81 0 -3.52
+  translation 21.1 0 0
   rotation 0 1 0 0
-  size 80 80 5
+  size 80 80 0
 }
 Robot {
   translation 0.1 0 0.1
@@ -35,20 +35,18 @@ Robot {
   supervisor TRUE
 }
 DEF matrice Robot {
-  translation 5.939255072534762e-05 -5.560833010938684e-05 1.4999999999997389
-  rotation 5.408220279257192e-36 -5.873676510001413e-39 1 8.066932678183232e-49
+  translation 0 0 1.65
+  rotation -6.1135893470261545e-06 1.6537729527859848e-06 -0.9999999999799445 0.06246057049087105
   children [
     DEF UAV Transform {
-      translation 0.01 -1.4609e-07 0.0299998
       rotation 3.3905113482557537e-09 0.70710528118436 0.707108281185553 3.14159
       scale 0.02 0.02 0.02
       children [
         DEF TARGET Transform {
-          translation 0 0.005 0
         }
         DEF PROP4 Transform {
           translation 9.05 1.4 -8.9
-          rotation 0 0.9999999999999999 0 0.3420201433257183
+          rotation 0 1 0 -1
           children [
             DEF PROP Transform {
               translation 0.45 0 -0.08
@@ -65,7 +63,7 @@ DEF matrice Robot {
         }
         DEF PROP3 Transform {
           translation -9 1.4 -8.9
-          rotation 0 -0.9999999999999999 0 0.3420201433257183
+          rotation 0 -1 0 -1
           children [
             DEF PROP Transform {
               translation 0.45 0 -0.08
@@ -82,7 +80,7 @@ DEF matrice Robot {
         }
         DEF PROP2 Transform {
           translation 9.05 1.4 9.2
-          rotation 0 0.9999999999999999 0 0.3420201433257183
+          rotation 0 1 0 -1
           children [
             DEF PROP Transform {
               translation 0.45 0 -0.08
@@ -99,7 +97,7 @@ DEF matrice Robot {
         }
         DEF PROP1 Transform {
           translation -9 1.4 9.2
-          rotation 0 -0.9999999999999999 0 0.3420201433257183
+          rotation 0 -1 0 -1
           children [
             DEF PROP Transform {
               translation 0.45 0 -0.08
@@ -122,6 +120,7 @@ DEF matrice Robot {
       ]
     }
     RangeFinder {
+      translation 0.11 0.003 -0.028
       rotation 0 1 0 1.5707996938995747
       fieldOfView 2
       width 640
@@ -129,6 +128,7 @@ DEF matrice Robot {
       maxRange 8
     }
     Camera {
+      translation 0.11 0.003 -0.028
       rotation 0 1 0 1.5707996938995747
       name "camera_l"
       fieldOfView 2
@@ -136,28 +136,12 @@ DEF matrice Robot {
       height 480
       far 8
     }
-    Solid {
-      rotation 0 1 0 1.5708
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0.180392 0.203922 0.211765
-            }
-          }
-          geometry Cone {
-            bottomRadius 0.05
-            height 0.1
-          }
-        }
-      ]
-    }
   ]
   controller "<extern>"
   supervisor TRUE
 }
 DEF Paneles Transform {
-  translation 0 0 1.4
+  translation 0 0 1.5
   rotation 0 1 0 0
   children [
     Solid {
@@ -1101,6 +1085,954 @@ DEF Paneles Transform {
         }
       ]
       name "panel1(40)"
+    }
+  ]
+}
+DEF Paneles Transform {
+  translation -4.88994 -20.24 1.5
+  rotation 0 0 1 1.5708
+  children [
+    Solid {
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(2)"
+    }
+    Solid {
+      translation 1.01 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 2.02 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 3.03 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 4.04 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 5.05 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 6.06 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 7.07 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 8.08 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 9.09 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 10.1 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 11.11 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 12.12 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 13.13 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 14.14 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 15.15 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 16.16 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 17.17 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 18.18 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 19.19 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 20.2 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 21.21 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 22.22 0 0
+      rotation 0 0 -0.9999999999999999 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 23.23 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 24.24 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 25.25 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 26.26 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 27.27 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 28.28 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 29.29 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 30.3 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 31.31 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 32.32 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 33.33 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 34.34 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 35.35 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 36.36 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 37.37 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 38.38 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 39.39 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
+    }
+    Solid {
+      translation 40.4 0 0
+      rotation 0 1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              ambientIntensity 0
+              diffuseColor 0.180392 0.203922 0.211765
+            }
+            texture ImageTexture {
+              url [
+                "../images/panel.jpeg"
+              ]
+            }
+          }
+          geometry Box {
+            size 1 2 0.05
+          }
+        }
+      ]
+      name "panel1(3)"
     }
   ]
 }
@@ -2054,7 +2986,7 @@ DEF Paneles Transform {
 }
 DEF Paneles Transform {
   translation 0 6 1.5
-  rotation -1 0 0 -0.523595307179586
+  rotation 1 0 0 -5.307179586466759e-06
   children [
     Solid {
       rotation 0 0 -0.9999999999999999 0
@@ -3001,7 +3933,7 @@ DEF Paneles Transform {
   ]
 }
 Pedestrian {
-  translation -2.04 -0.02 0.24
+  translation -2.41 0 1.25
 }
 PhotoFrame {
   translation -0.38 -0.84 1.53
